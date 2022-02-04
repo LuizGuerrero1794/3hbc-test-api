@@ -17,7 +17,6 @@ class AuthController extends Controller
     {
         $request->validate([
             'password' => 'required|string',
-            'remember_me' => 'boolean'
         ]);
         
         $credentials = request(['email', 'password']);
@@ -43,7 +42,7 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $tokenResult->accessToken,
             'token_type' => 'Bearer',
-            'expires_at' => Carbon::parse($tokenResult->expires_at)->toDateTimeString()
+            'expires_at' => Carbon::parse($tokenResult->token->expires_at)->toDateTimeString()
         ]);
     }
 
