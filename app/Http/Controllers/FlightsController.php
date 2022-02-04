@@ -9,11 +9,12 @@ use DB;
 
 class FlightsController extends Controller
 {
+
     public function index()
     {
         $items = Flight::all();
         
-        $items->load('airline');
+        $items->load('airline','airport');
 
         return response()->json([
             'items' => $items
@@ -32,6 +33,7 @@ class FlightsController extends Controller
             $item->arrival_time = $request->arrival_time;
             $item->departure_time = $request->departure_time;
             $item->airline_id = $request->airline_id;
+            $item->destination_id = $request->destination_id;
             
             if(!$item->save()){
                 throw new Exception('ERROR AL INTENTAR GUARDAR');
@@ -64,6 +66,7 @@ class FlightsController extends Controller
             $flight->arrival_time = $request->arrival_time;
             $flight->departure_time = $request->departure_time;
             $flight->airline_id = $request->airline_id;
+            $flight->destination_id = $request->destination_id;
 
             if(!$flight->save()){
                 throw new Exception('ERROR AL INTENTAR ACTUALIZAR');

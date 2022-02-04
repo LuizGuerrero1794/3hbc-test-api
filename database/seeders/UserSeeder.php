@@ -14,10 +14,20 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
-            'name' => '3HBC Test',
-            'email' => '3hbc@test.com',
+        $user = User::create([
+            'name' => '3HBC Admin',
+            'email' => '3hbc.admin@test.com',
             'password' => 'password',
         ]);
+
+        $user->assignRole('admin');
+
+        $user = User::create([
+            'name' => '3HBC Operations',
+            'email' => '3hbc.operations@test.com',
+            'password' => 'password',
+        ]);
+
+        $user->assignRole('operations');
     }
 }

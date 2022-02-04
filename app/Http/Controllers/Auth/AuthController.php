@@ -10,9 +10,6 @@ use Auth;
 
 class AuthController extends Controller
 {
-    /**
-     * Login and create token
-     */
     public function login (Request $request)
     {
         $request->validate([
@@ -43,18 +40,6 @@ class AuthController extends Controller
             'access_token' => $tokenResult->accessToken,
             'token_type' => 'Bearer',
             'expires_at' => Carbon::parse($tokenResult->token->expires_at)->toDateTimeString()
-        ]);
-    }
-
-    /**
-     * Cierre de sesión (anular el token)
-     */
-    public function logout(Request $request)
-    {
-        $request->user()->token()->revoke();
-
-        return response()->json([
-            'message' => 'Successfully logged out'
         ]);
     }
 }

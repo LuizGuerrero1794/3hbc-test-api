@@ -23,8 +23,15 @@ class Flight extends Model
         'arrival_time'
     ];
 
-    public function airline(){
+    public function airline()
+    {
         return $this->hasOne(Airline::class, 'id', 'airline_id');
     }
+
+    public function airport()
+    {
+        return $this->hasOne(Airport::class, 'id', 'destination_id');
+    }
+    
     
 }
